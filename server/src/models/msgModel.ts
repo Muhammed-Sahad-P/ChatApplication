@@ -1,9 +1,28 @@
-import mongoose from "mongoose";
+import mongoose, { Document } from "mongoose";
 
-const MessageSchema = new mongoose.Schema({
-  sender: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
-  text: { type: String, required: true },
-  timestamp: { type: Date, default: Date.now },
-});
+interface IMessage extends Document {
+  sender: mongoose.Schema.Types.ObjectId;
+  receiver: mongoose.Schema.Types.ObjectId;
+  content: string;
+  timestamp: Date;
+}
 
-export default mongoose.model("Message", MessageSchema);
+const messageSchema = new mongoose.Schema(
+  {
+    sender: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    receiver: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    content: { type: String, required: true },
+    timestamp: { type: Date, default: Date.now },
+  },
+  { timestamps: true }
+);
+
+export default mongoose.model<IMessage>("Message", messageSchema);
