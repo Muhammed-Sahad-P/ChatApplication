@@ -4,7 +4,8 @@ interface IMessage extends Document {
   sender: mongoose.Schema.Types.ObjectId;
   receiver: mongoose.Schema.Types.ObjectId;
   content: string;
-  timestamp: Date;
+  status: "sent" | "delivered" | "read";
+  createdAt: Date;
 }
 
 const messageSchema = new mongoose.Schema(
@@ -20,7 +21,11 @@ const messageSchema = new mongoose.Schema(
       required: true,
     },
     content: { type: String, required: true },
-    timestamp: { type: Date, default: Date.now },
+    status: {
+      type: String,
+      enum: ["sent", "delivered", "read"],
+      default: "sent",
+    },
   },
   { timestamps: true }
 );
