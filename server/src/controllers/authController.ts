@@ -63,3 +63,13 @@ export const login = async (req: Request, res: Response) => {
     .status(200)
     .json(new StandardResponse("User logged in successfully", response));
 };
+
+//get all users
+export const getAllUsers = async (req: Request, res: Response) => {
+  const users = await userModel.find();
+
+  if (!users)
+    return res.status(404).json(new StandardResponse("No users found"));
+
+  res.status(200).json(users);
+};
