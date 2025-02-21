@@ -1,0 +1,24 @@
+.auth-container {
+  max-width: 400px;
+  margin: auto;
+  text-align: center;
+}
+
+.chat-container {
+  max-width: 600px;
+  margin: auto;
+}
+
+.message {
+  padding: 8px;
+  margin: 5px;
+}
+
+.sent {
+  background-color: #305986;
+  color: white;
+}
+
+.received {
+  background-color: #e5e5ea;
+}
